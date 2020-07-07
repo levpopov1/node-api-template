@@ -1,0 +1,24 @@
+{
+  "name": "node-api-template",
+  "version": "1.0.0",
+  "description": "Node boilerplate for simple API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levpopov1/node-api-template.git"
+  },
+  "keywords": [
+    "nodejs",
+    "api",
+    "template"
+  ],
+  "author": "Lev Popov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/levpopov1/node-api-template/issues"
+  },
+  "homepage": "https://github.com/levpopov1/node-api-template#readme"
+}
