@@ -1,12 +1,13 @@
-// main entry point for API server
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
-const routes = require("./routes");
-const connectDB = require("./db");
+import express, { json } from "express";
+import cors from "cors";
+import morgan from "morgan";
+import routes from "./routes/index.js";
+import connectDB from "./db.js";
+import dotenv from "dotenv";
+import { ApolloServer, gql } from "apollo-server";
 
 // sets environment variables based on centents of .env file
-require("dotenv").config();
+dotenv.config();
 
 // db
 connectDB();
@@ -26,7 +27,7 @@ app.use(cors());
 // dev middleware
 app.use(morgan("dev"));
 // url middleware
-app.use(express.json());
+app.use(json());
 
 // route handlers entrypoint for all routes
 app.use("/api", routes);

@@ -1,19 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
+import { Router } from "express";
+import { getAll, getOne, post } from "../controllers/peopleController.js";
+import { PersonModel as Person } from "../schema/Person/model.js";
+import findByID from "../middleware/findById.js";
+import findAll from "../middleware/findAll.js";
 
-const peopleController = require('../controllers/peopleController');
-const Person = mongoose.model('Person');
+const router = Router();
 
-const findByID = require('../middleware/findById');
-const findAll = require('../middleware/findAll');
+router.get("/", findAll(Person), getAll);
+router.get("/:id", findByID(Person), getOne);
 
+router.post("/", post);
 
-router.get('/', findAll(Person), peopleController.getAll);
-router.get('/:id', findByID(Person), peopleController.getOne);
-
-router.post('/', peopleController.post);
-
-
-
-module.exports = router;
+export default router;

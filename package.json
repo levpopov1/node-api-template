@@ -18,6 +18,7 @@
   ],
   "author": "Lev Popov",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/levpopov1/node-api-template/issues"
   },
