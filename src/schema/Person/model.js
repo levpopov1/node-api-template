@@ -12,7 +12,7 @@ var PersonSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ["m", "f"],
+    enum: ["male", "female"],
   },
 });
 

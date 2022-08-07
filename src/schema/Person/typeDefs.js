@@ -1,6 +1,16 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-core";
 
 export const PersonType = gql`
+  type Query {
+    people: [Person]
+    person(id: ID!): Person
+  }
+
+  type Mutation {
+    addPerson(data: PersonInput!): Person
+    updatePerson(id: ID!, data: PersonInput!): Person
+  }
+
   type Person {
     _id: ID!
     firstname: String
@@ -9,7 +19,13 @@ export const PersonType = gql`
   }
 
   enum Gender {
-    m
-    f
+    male
+    female
+  }
+
+  input PersonInput {
+    firstname: String
+    surname: String
+    gender: Gender
   }
 `;
