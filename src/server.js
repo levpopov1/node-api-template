@@ -10,7 +10,8 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
-import { PersonType, PersonResolver } from "./schema/Person/index.js";
+import { Schema } from "./graphql/schema.js";
+import { Resolvers } from "./graphql/resolvers.js";
 
 // sets environment variables based on centents of .env file
 dotenv.config();
@@ -43,8 +44,8 @@ const PORT = process.env.PORT || 5000;
 async function startApolloServer() {
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
-    typeDefs: PersonType,
-    resolvers: PersonResolver,
+    typeDefs: Schema,
+    resolvers: Resolvers,
     csrfPrevention: true,
     cache: "bounded",
     plugins: [

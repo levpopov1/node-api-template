@@ -1,4 +1,4 @@
-import { PersonModel as Person } from "../schema/Person/index.js";
+import { Person } from "../model/Person.js";
 
 function getAll(req, res) {
   res.status(200).json(req.items);

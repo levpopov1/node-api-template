@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-core";
 
-export const PersonType = gql`
+export const Schema = gql`
   type Query {
     people: [Person]
     person(id: ID!): Person

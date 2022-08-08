@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAll, getOne, post } from "../controllers/peopleController.js";
-import { PersonModel as Person } from "../schema/Person/model.js";
+import { Person } from "../model/Person.js";
 import findByID from "../middleware/findById.js";
 import findAll from "../middleware/findAll.js";
 
