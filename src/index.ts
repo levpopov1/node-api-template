@@ -12,6 +12,7 @@ import routes from "./routes";
 import connectDB from "./db";
 import { Schema } from "./graphql/schema";
 import { Resolvers } from "./graphql/resolvers";
+import PeopleAPI from "./dataSources/People";
 
 // sets environment variables based on centents of .env file
 dotenv.config();
@@ -46,6 +47,11 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs: Schema,
     resolvers: Resolvers,
+    dataSources: () => {
+      return {
+        peopleAPI: new PeopleAPI(),
+      };
+    },
     csrfPrevention: true,
     cache: "bounded",
     plugins: [
