@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { notFound, genericErrorHandler } from "../middleware/errorHandlers.js";
-import peopleRouter from "./peopleRouter.js";
+import { notFound, genericErrorHandler } from "../middleware/errorHandlers";
+import peopleRouter from "./peopleRouter";
 
 const router = Router();
 
 // basic response on Root endpoint
-router.get("/", function (req, res) {
+router.get("/", (req, res) => {
   res.status(200).json({
     statusCode: 200,
     message: "welcome to the API",

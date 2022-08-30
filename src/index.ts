@@ -1,17 +1,18 @@
 import http from "http";
 import express, { json } from "express";
+import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
-import routes from "./routes/index.js";
-import connectDB from "./db.js";
-import dotenv from "dotenv";
 import { ApolloServer } from "apollo-server-express";
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
-import { Schema } from "./graphql/schema.js";
-import { Resolvers } from "./graphql/resolvers.js";
+import routes from "./routes";
+import connectDB from "./db";
+import { Schema } from "./graphql/schema";
+import { Resolvers } from "./graphql/resolvers";
+import PeopleAPI from "./dataSources/People";
 
 // sets environment variables based on centents of .env file
 dotenv.config();
@@ -22,8 +23,8 @@ connectDB();
 // start server instance
 const app = express();
 
-/*  
-// uncomment this line if running behind a proxy 
+/*
+// uncomment this line if running behind a proxy
 // the x-forwarded-for header in nginx config must be set
 // node will set req.ip to real remote address
 app.set('trust proxy', true);
@@ -46,6 +47,11 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs: Schema,
     resolvers: Resolvers,
+    dataSources: () => {
+      return {
+        peopleAPI: new PeopleAPI(),
+      };
+    },
     csrfPrevention: true,
     cache: "bounded",
     plugins: [
@@ -55,10 +61,11 @@ async function startApolloServer() {
   });
   await server.start();
   server.applyMiddleware({ app });
-  await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
-  console.log(
-    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-  );
+  httpServer.listen({ port: PORT }, () => {
+    console.log(
+      `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+    );
+  });
 }
 
 startApolloServer();
