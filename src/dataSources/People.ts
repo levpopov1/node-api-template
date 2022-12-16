@@ -13,6 +13,11 @@ class PeopleAPI extends DataSource {
   async getPersonById(id: string) {
     return await Person.findById(id);
   }
+
+  async createPerson(personInput: any) {
+    const { firstname, surname, gender } = personInput;
+    return await Person.create({ firstname, surname, gender });
+  }
 }
 
 export default PeopleAPI;

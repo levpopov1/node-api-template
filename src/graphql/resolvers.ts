@@ -7,4 +7,9 @@ export const Resolvers = {
       return context.dataSources.peopleAPI.getPersonById(args.id);
     },
   },
+  Mutation: {
+    addPerson: async (parent: any, args: any, context: any, info: any) => {
+      return context.dataSources.peopleAPI.createPerson(args.data);
+    },
+  },
 };
